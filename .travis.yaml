@@ -1,0 +1,35 @@
+# What are we doing here:
+#   Install Google Cloud SDK CLI
+#   Configure the SDK without Google cloud auth info
+#   Login to Docker CLI
+#   Build the 'test' version of multi-client project
+#   Run tests
+#   If tests are successful, run a script to deploy newest images
+#   Build all out images, tag each one, push each to docker hub
+#   Apply all configs in the k8s folder
+#   Imperatively set latest images on each deployment
+
+
+
+# Setup Service account for usage:
+#       Create a Service Account
+#       Download service account credentials in a json file
+#       Download and install the travis CLI
+#           Get docker image that has runy pre-installed, then we can install travis CLI there.
+#           Run this command:
+#           docker run -it -v $(pwd):/app ruby:2.3 sh
+#             Description of above command:
+#               run docker interactively, using $(pwd) as a volume and /app as my work directory using ruby:2.3 image, and run shell within this container
+#       Encrypt and upload the json file to our travis account
+#       In travis.yaml, add code to unencrypt the json file and load it into gcloud sdk
+
+sudo: required
+services:
+  - docker
+before_install:
+  #   Install Google Cloud SDK CLI
+  - curl https://sdk.cloud.google.com | bash > /dev/null;
+  #   Configure the SDK without Google cloud auth info
+  - source $HOME/google-cloud-sdk/path.bash.inc
+  - gcloud components update kubectl
+  - gcloud auth activate-service-account --key-file service-account.json # Setup service-account before this setup separately
