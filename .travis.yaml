@@ -10,6 +10,8 @@
 #   Imperatively set latest images on each deployment
 
 
+# https://github.com/StephenGrider/multi-k8s
+
 
 # Setup Service account for usage:
 #       Create a Service Account

@@ -22,7 +22,7 @@ docker push rahul9712/dev-docker-multi-server:$SHA
 docker push rahul9712/dev-docker-multi-worker:$SHA
 
 #   Apply all configs in the k8s folder
-kubectl apple -f k8s
+kubectl apply -f k8s
 
 
 #   Imperatively set latest images on each deployment for this git version
